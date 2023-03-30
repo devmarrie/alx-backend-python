@@ -11,6 +11,6 @@ Args:
 from typing import Tuple, Union
 
 
-def to_kv(k: str, v: Union[int,float]) -> Tuple[str, float]:
+def to_kv(k: str, v: Union[int, float]) -> Tuple[str, float]:
     """Return string k  and the square of v """
     return (k, v**2)
