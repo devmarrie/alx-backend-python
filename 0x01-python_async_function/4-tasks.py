@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
+"""Let's execute multiple coroutines at the same time with async
+"""
 import asyncio
 from typing import List
 from queue import PriorityQueue
 task_wait_random = __import__('3-tasks').task_wait_random
-"""Let's execute multiple coroutines at the same time with async
-"""
+
 
 
 async def task_wait_n(n: int, max_delay: int) -> List[float]:
