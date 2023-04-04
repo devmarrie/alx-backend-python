@@ -7,7 +7,7 @@ import asyncio
 async_comprehension = __import__('1-async_comprehension').async_comprehension
 
 
-async def measure_runtime():
+async def measure_runtime() -> float:
     """Excecute for time in paralel
     using asyncio.gather and measures the time of execution
     and returns the total execution time
