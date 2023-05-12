@@ -19,8 +19,24 @@ class TestAccessNestedMap(unittest.TestCase):
     ])
     def test_access_nested_map(
             self, nested_map: Dict,
-            path: Tuple[str], expected: Union[Dict, int]):
+            path: Tuple[str],
+            expected: Union[Dict, int]) -> None:
         """
         Remember to decorate with parameterized
         """
         self.assertEqual(access_nested_map(nested_map, path), expected)
+
+    @parameterized.expand([
+        ({}, ("a",)),
+        ({"a": 1}, ("a", "b"))
+    ])
+    def test_access_nested_map_exception(self,
+                                         nested_map: Dict,
+                                         path: Tuple,
+                                         ) -> None:
+        """
+        Raises a keyerror
+        when the parameterized values are used
+        """
+        with self.assertRaises(KeyError):
+            access_nested_map(nested_map, path)
