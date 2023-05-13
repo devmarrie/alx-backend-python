@@ -47,25 +47,28 @@ class TestGetJson(unittest.TestCase):
     """
     Handles the get json method
     """
-    @patch('test_utils.requests.get')
     @parameterized.expand([
         ("http://example.com", {"payload": True}),
         ("http://holberton.io", {"payload": False})
     ])
     def test_get_json(self,
-                      mock_get_json: Mock,
-                      url: str,
+                      test_url: str,
                       test_payload: Dict):
         """
         Use existing requests using patch
         set up mock response and return it
-        """
+        This was the first shot second one is preffered
         mock_response = Mock()
         mock_response.json.return_value = test_payload
         mock_get_json.return_value = mock_response
-        res = get_json(url)
-        mock_get_json.assert_called_once_with(url)
-        self.assertEqual(res, test_payload)
+        res = get_json(test_url)
+        mock_get_json.assert_called_once_with(test_url)
+        self.assertEqual(res, test_payload)"""
+        attrs = {"json.return_value": test_payload}
+        with patch("requests.get",
+                   return_value=Mock(**attrs)) as mock_get_json:
+            self.assertEqual(get_json(test_url), test_payload)
+            mock_get_json.assert_called_once_with(test_url)
 
 
 if __name__ == "__main__":
